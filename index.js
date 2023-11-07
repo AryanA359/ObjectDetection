@@ -1,19 +1,16 @@
 // Below this line, create a variable storing your account token from Hugging Face. Name it ACCOUNT_TOKEN.
-/* Your code here */
+const ACCOUNT_TOKEN = "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";
 
 // Below this line, create a variable storing the Hugging Face API Endpoint. Name it API_ENDPOINT.
-/* Your code here */
-
-
+const API_ENDPOINT = "https://api-inference.huggingface.co/models/facebook/detr-resnet-50" ;
 
 
 /* ========================= Code to setup getting webcam permissions ========================= */
 
 // Below this line, place the code to get the video element. Name it video.
-/* Your code here */
-
+const video = document.getElementById("video")
 // Below this line, place the code to get the canvas element. Name it canvas.
-/* Your code here */
+const canvas = document.getElementById("canvas")
 
 
 // Getting camera permissions
@@ -55,10 +52,11 @@ const callAPI = () => {
             // Call API
             // Edit the code below to make the API call work
             const response = await fetch(
-                'Your code here',
+                API_ENDPOINT,
+ 
                 {
-                    headers: { Authorization: `Your code here` },
-                    method: "Your code here",
+                    headers: { Authorization: "Bearer " + ACCOUNT_TOKEN },
+                    method: "POST",
                     body: blob,
                 }
             );
@@ -78,8 +76,8 @@ const drawBoxes = (results) => {
         const { xmin, ymin, xmax, ymax } = result['box'];
 
         // Edit the code below to determine the width and height of the box
-        const width = 'Your code here';
-        const height = 'Your code here';
+        const width = xmax - xmin;
+        const height = ymax- ymin;
         
         // Draw and label boxes
         const ctx = canvas.getContext('2d');
@@ -121,7 +119,6 @@ const handleClick = async () => {
 }
 
 // Below this line, place the code to get the button element.
-/* Your code here */
-
+const button = document.getElementById("button");
 // Below this line, add an event listener with the handleClick function for the appropriate event
-/* Your code here */
+button.addEventListener("click", handleClick);
